@@ -1,6 +1,7 @@
-[![Build Status](https://travis-ci.com/mediapeers/ansible-role-thumbor.svg?branch=master)](https://travis-ci.com/mediapeers/ansible-role-thumbor)
+[![Build Status](https://travis-ci.com/onaio/ansible-thumbor.svg?branch=master)](https://travis-ci.com/onaio/ansible-thumbor)
 
 # Thumbor role
+This role was forked from [mediapeers/ansible-role-thumbor](https://github.com/mediapeers/ansible-role-thumbor).
 Ansible role that installs [Thumbor](https://github.com/thumbor/thumbor) and sets it up for production use.
 It uses [supervisord](http://supervisord.org/) to spawn mulitple Thumbor server processes and puts Nginx in front of it, to loadbalance
 between them and provide a robust webserver for access from the outside.
