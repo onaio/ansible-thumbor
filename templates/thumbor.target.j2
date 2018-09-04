@@ -11,7 +11,6 @@ After=network.target
 
 # Starts all subtasks:
 Requires={% for num in range(1,(thumbor_processes+1)) %}thumbor@{{ num }}.service {% endfor %}
-Before=nginx.service
 
 # No service section, will use the required template configs
 
