@@ -110,7 +110,7 @@ URL_SIGNER = 'libthumbor.url_signers.base64_hmac_sha1'
 SECURITY_KEY = '{{ thumbor_signing_key }}'
 
 ## Indicates if the /unsafe URL should be available
-ALLOW_UNSAFE_URL = False
+ALLOW_UNSAFE_URL = {{ thumbor_allow_unsafe_url }}
 
 ## Indicates if encrypted (old style) URLs should be allowed
 ALLOW_OLD_URLS = True
