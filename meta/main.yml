@@ -1,19 +1,20 @@
 ---
 galaxy_info:
   author: Stefan Horning
-  description: A role that installs and sets up Thumbor for production use, depends on mediapeers.nginx role
+  description: A role that installs and sets up Thumbor for production use
   company: Ona Systems Inc
   license: BSD
   min_ansible_version: 1.8
   platforms:
-  - name: Ubuntu
-    versions:
-    - precise
-    - quantal
-    - raring
-    - saucy
-    - trusty
-    - utopic
-    - vivid
-  categories:
-  - web
+    - name: Ubuntu
+      versions:
+        - precise
+        - quantal
+        - raring
+        - saucy
+        - trusty
+        - utopic
+        - vivid
+  galaxy_tags:
+    - thumbor
+    - tcaws
