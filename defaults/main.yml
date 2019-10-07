@@ -4,15 +4,22 @@
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
 
-thumbor_aws_plugin_version: 6.0.4
+thumbor_aws_plugin_version: 6.2.12
 # Optionally set spefic thumbor version to not rely on tc_aws
 # dependency specification.
 # So before setting this make sure the specified version works
 # with the version of tc_aws set in thumbor_aws_plugin_version,
 # then set it like this:
-# thumbor_specific_version: 6.1.1
-
+thumbor_version: 6.7.0
+thumbor_python_executable: python2.7
+thumbor_home: "/home/{{ thumbor_user }}"
+thumbor_virtualenv_path: "{{ thumbor_home }}/.virtualenvs/{{ thumbor_user }}"
+thumbor_shell: "/sbin/nologin"
+thumbor_group: thumbor
 thumbor_user: thumbor
+thumbor_python_path: "{{ thumbor_virtualenv_path }}/lib/{{ thumbor_python_executable }}"
+thumbor_recreate_virtualenv: false
+
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor
 thumbor_allowed_sources:
@@ -41,3 +48,5 @@ supervisord_log_dir: /var/log/supervisor
 thumbor_processes: 4 # amount of thumbor processes to spawn
 
 thumbor_allow_unsafe_url: False
+thumbor_additional_pip_packages: []
+thumbor_executable_path: "{{ thumbor_virtualenv_path }}/bin/thumbor"

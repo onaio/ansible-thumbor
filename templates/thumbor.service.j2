@@ -14,7 +14,9 @@ Type=simple
 Restart=on-failure
 
 User={{ thumbor_user }}
+Environment="PATH={{ thumbor_virtualenv_path }}/bin:$PATH"
+Environment="PYTHONPATH={{ thumbor_python_path }}"
 
 SyslogIdentifier=thumbor-%i
 
-ExecStart=/usr/local/bin/thumbor -p 800%i -c {{ thumbor_config_dir }}/thumbor.conf
+ExecStart={{ thumbor_executable_path }} -p 800%i -c {{ thumbor_config_dir }}/thumbor.conf

@@ -1,0 +1,76 @@
+---
+- name: Create thumbor group.
+  group:
+    name: "{{ thumbor_group }}"
+
+- name: Create thumbor user.
+  user:
+    name: "{{ thumbor_user }}"
+    group: "{{ thumbor_group }}"
+    shell: "{{ thumbor_shell }}"
+    home: "{{ thumbor_home }}"
+    create_home: yes
+
+- include_tasks: "install-{{ thumbor_python_executable }}.yml"
+
+- name: Ensure system dependencies are installed
+  apt:
+    pkg: ["build-essential", "libgraphicsmagick++1-dev", "libcurl4-openssl-dev",
+     "libssl-dev", "libtiff5-dev", "libpng12-dev", "libjpeg-dev", "libjasper-dev",
+    "libwebp-dev"]
+    state: present
+    update_cache: yes
+    cache_valid_time: 600
+
+- name: Delete the Thumbor virtualenv directory
+  file:
+    state: absent
+    path: "{{ thumbor_virtualenv_path }}"
+  when: thumbor_recreate_virtualenv
+
+- name: Make sure the Thumbor virtualenv directory exists
+  file:
+    state: directory
+    path: "{{ thumbor_virtualenv_path }}"
+    owner: "{{ thumbor_user }}"
+    group: "{{ thumbor_group }}"
+    recurse: yes
+    creates: "{{ thumbor_virtualenv_path }}"
+
+# - name: Install Thumbor dependent pip libraries
+#   become: true
+#   become_user: "{{ thumbor_user }}"
+#   pip:
+#     name: "{{ item }}"
+#     state: latest
+#     virtualenv: "{{ thumbor_virtualenv_path }}"
+#     virtualenv_python: "{{ thumbor_python_executable }}"
+#   with_items:
+#     - pgmagick
+
+- name: Install thumbor from pypi
+  become: true
+  become_user: "{{ thumbor_user }}"
+  pip:
+    name: thumbor
+    version: "{{ thumbor_version }}"
+    virtualenv: "{{ thumbor_virtualenv_path }}"
+    virtualenv_python: "{{ thumbor_python_executable }}"
+
+- name: Install thumbor AWS plugin from pypi
+  become: true
+  become_user: "{{ thumbor_user }}"
+  pip:
+    name: tc_aws
+    version: "{{ thumbor_aws_plugin_version }}"
+    virtualenv: "{{ thumbor_virtualenv_path }}"
+    virtualenv_python: "{{ thumbor_python_executable }}"
+
+- name: Install additional packages
+  become: true
+  become_user: "{{ thumbor_user }}"
+  pip:
+    name: "{{ item }}"
+    virtualenv: "{{ thumbor_virtualenv_path }}"
+    virtualenv_python: "{{ thumbor_python_executable }}"
+  with_items: "{{ thumbor_additional_pip_packages }}"
