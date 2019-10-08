@@ -28,26 +28,6 @@
     path: "{{ thumbor_virtualenv_path }}"
   when: thumbor_recreate_virtualenv
 
-- name: Make sure the Thumbor virtualenv directory exists
-  file:
-    state: directory
-    path: "{{ thumbor_virtualenv_path }}"
-    owner: "{{ thumbor_user }}"
-    group: "{{ thumbor_group }}"
-    recurse: yes
-    creates: "{{ thumbor_virtualenv_path }}"
-
-# - name: Install Thumbor dependent pip libraries
-#   become: true
-#   become_user: "{{ thumbor_user }}"
-#   pip:
-#     name: "{{ item }}"
-#     state: latest
-#     virtualenv: "{{ thumbor_virtualenv_path }}"
-#     virtualenv_python: "{{ thumbor_python_executable }}"
-#   with_items:
-#     - pgmagick
-
 - name: Install thumbor from pypi
   become: true
   become_user: "{{ thumbor_user }}"
