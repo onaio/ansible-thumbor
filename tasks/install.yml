@@ -16,8 +16,7 @@
 - name: Ensure system dependencies are installed
   apt:
     pkg: ["build-essential", "libgraphicsmagick++1-dev", "libcurl4-openssl-dev",
-     "libssl-dev", "libtiff5-dev", "libpng12-dev", "libjpeg-dev", "libjasper-dev",
-    "libwebp-dev"]
+     "libssl-dev", "libtiff5-dev"]
     state: present
     update_cache: yes
     cache_valid_time: 600
