@@ -1,52 +1,13 @@
 ---
 sudo: required
-dist: xenial
-# Do not use the travis languague setups (install ruby/python manually) for ansible tests!
-language: shell
-
+language: python
+services:
+  - docker
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y unzip
-
+  - sudo apt-get -qq update
 install:
-  # Install ruby for and serverspec gem as root
-  - sudo apt-get install -y ruby
-  - sudo ruby -v
-  - sudo gem install serverspec
-
-  # Install Ansible through pip
-  - sudo apt-get install -y python-pip python-dev
-  - python --version
-  - sudo -H pip install ansible
-  - ansible --version
-
-  # Add role dependency (mediapeers.nginx)
-  - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip && cd -
-  - mv tests/roles/ansible-role-nginx-master tests/roles/mediapeers.nginx
-
-  # Add ansible.cfg to pick up roles path.
-  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
-
+  - pip install ansible==2.7.10
+  - pip install molecule
+  - pip install docker-py
 script:
-  # Check the role/playbook's syntax.
-  - "ansible-playbook -i tests/inventory tests/test.yml --syntax-check"
-
-  # Run the role/playbook with ansible-playbook.
-  - "ansible-playbook -i tests/inventory tests/test.yml --connection=local"
-
-  # Run the role/playbook again, checking to make sure it's idempotent.
-  # Allowing 3 'changes' for apt update and systemd test/enabling
-  - >
-    ansible-playbook -i tests/inventory tests/test.yml --connection=local
-    | grep -q 'changed=3.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-
-  # Run serverspec
-  - sudo rake spec
-  - which thumbor
-  - pip list --format=columns | grep 'thumbor\|boto\|aws\|pip\|tornado'
-  - curl -s http://localhost/healthcheck | grep -q 'WORKING'
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  - molecule test
