@@ -46,6 +46,8 @@
     owner: "{{ thumbor_user }}"
     group: "{{ thumbor_user }}"
     mode: 0755
+  notify:
+    - restart thumbor
 
 - name: Ensure thumbor log dir exists
   file:
@@ -100,6 +102,8 @@
   template:
     src: thumbor.target.j2
     dest: /etc/systemd/system/thumbor.target
+  notify:
+    - restart thumbor
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'
@@ -108,7 +112,6 @@
   systemd:
     name: thumbor.target
     enabled: yes
-    state: restarted
     daemon_reload: yes
   when:
     - ansible_distribution == 'Ubuntu'

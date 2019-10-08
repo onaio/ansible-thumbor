@@ -16,7 +16,7 @@ def test_hosts_file(host):
 
 
 def test_thumbor_service(host):
-    thumbor = host.service("thumbor")
+    thumbor = host.service("thumbor.target")
 
     assert thumbor.is_running
     assert thumbor.is_enabled

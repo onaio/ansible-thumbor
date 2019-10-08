@@ -5,3 +5,8 @@
   service:
     name: supervisor
     state: restarted
+
+- name: restart thumbor
+  service:
+    name: thumbor.target
+    state: restarted
