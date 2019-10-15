@@ -1,57 +1,27 @@
 ---
-# Installs Thumbor and the AWS plugin, and configures thumbor and supervisord
-
-# The tc_aws thumbor depency doesn't guarantee a specific thumbor version, this
-# task can be used to pin Thumbor version by setting thumbor_specific_version variable
-- name: Install specific Thumbor package version (when specific version given)
+# Configures thumbor and dependent services
+# This task is better run from the Ansible host as it needs a working AWS/Boto setup
+# hence using delegate_to localhost
+- name: Install Boto3 on the ansible host
   pip:
-    name: thumbor
-    version: "{{ thumbor_specific_version }}"
+    name: boto3
     state: present
-    # Use pip2 for installing as Thumbor not yet supports python 3
-    executable: pip2
-  when: thumbor_specific_version is defined
+  delegate_to: 127.0.0.1
+  # use normal user on ansible host (avoids switching to root)
+  become: false
+  when: s3_create_bucket
 
-# tc_aws adds S3 storage support to thumbor see https://github.com/thumbor-community/aws
-- name: Install python packages for Thumbor (as tc_aws depends on thumbor we just use that here to pull all requirements)
-  pip:
-    name: tc_aws
-    version: "{{ thumbor_aws_plugin_version }}"
-    # Use pip2 for installing as Thumbor not yet supports python 3
-    executable: pip2
-    state: present
-
-- name: Ensure we have specific version of the pyhon package certifi installed (to make SSL work on Ubuntu 14.04)
-  pip:
-    name: certify
-    state: absent # Uninstall current version
-  ignore_errors: yes
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version < '14.10'
-
-# Install last working version with Ubuntu 14.04s version of openssl,
-# see https://github.com/certifi/python-certifi/issues/26#issuecomment-138334830 for the issue.
-- pip:
-    name: certifi
-    version: 2015.04.28
-    state: present
-  when:
-    - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version < '14.10'
-
-- name: Create a system group for thumbor user (named after user)
-  group:
-    name: "{{ thumbor_user }}"
-    system: yes
-    state: present
-
-- name: Ensure system user for thumbor existis
-  user:
-    name: "{{ thumbor_user }}"
-    group: "{{ thumbor_user }}"
-    system: yes
-    state: present
+- name: Create result storage bucket on S3
+  aws_s3:
+    bucket: "{{ thumbor_result_storage_bucket }}"
+    object: "/{{ thumbor_result_storage_path }}"
+    mode: create
+    region: "{{ s3_aws_region }}"
+  # run on ansible host
+  delegate_to: 127.0.0.1
+  # use normal user on ansible host (avoids switching to root)
+  become: false
+  when: s3_create_bucket
 
 - name: Create thumbor config directory
   file:
@@ -76,6 +46,8 @@
     owner: "{{ thumbor_user }}"
     group: "{{ thumbor_user }}"
     mode: 0755
+  notify:
+    - restart thumbor
 
 - name: Ensure thumbor log dir exists
   file:
@@ -130,6 +102,8 @@
   template:
     src: thumbor.target.j2
     dest: /etc/systemd/system/thumbor.target
+  notify:
+    - restart thumbor
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'
@@ -138,9 +112,7 @@
   systemd:
     name: thumbor.target
     enabled: yes
-    state: restarted
     daemon_reload: yes
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'
-

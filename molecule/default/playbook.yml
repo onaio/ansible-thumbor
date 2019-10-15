@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    thumbor_signing_key: ABC123def456
+    s3_create_bucket: false
+  roles:
+    - role: thumbor
