@@ -93,7 +93,7 @@
 - name: Setup systemd template config to start Thumbor processes (on newer Ubuntus)
   template:
     src: thumbor.service.j2
-    dest: /etc/systemd/system/thumbor@.service
+    dest: /etc/systemd/system/thumbor.service
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'
