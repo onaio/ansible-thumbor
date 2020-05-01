@@ -19,4 +19,4 @@ Environment="PYTHONPATH={{ thumbor_python_path }}"
 
 SyslogIdentifier=thumbor-%i
 
-ExecStart={{ thumbor_executable_path }} -p 800%i -c {{ thumbor_config_dir }}/thumbor.conf
+ExecStart={{ thumbor_executable_path }} -p 8000 -c {{ thumbor_config_dir }}/thumbor.conf
