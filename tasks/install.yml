@@ -13,10 +13,12 @@
 
 - include_tasks: "install-{{ thumbor_python_executable }}.yml"
 
+# https://web.dev/install-thumbor/#install-thumbor-dependencies
 - name: Ensure system dependencies are installed
   apt:
     pkg: ["build-essential", "libgraphicsmagick++1-dev", "libcurl4-openssl-dev",
-     "libssl-dev", "libtiff5-dev"]
+     "libssl-dev", "libtiff5-dev", "python-opencv", "libopencv-dev",
+     "libjpeg-dev", "libpng-dev", "libwebp-dev", "webp"]
     state: present
     update_cache: yes
     cache_valid_time: 600
