@@ -113,13 +113,7 @@
     name: thumbor.target
     enabled: yes
     daemon_reload: yes
+    state: started
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'
-
-- name: Check healthcheck endpoint returns status code 200 and fail if the word 'WORKING' is not in the page contents
-  uri:
-    url: http://127.0.0.1:8001/healthcheck
-    return_content: yes
-  register: this
-  failed_when: "'WORKING' not in this.content"
