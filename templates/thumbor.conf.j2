@@ -45,7 +45,6 @@
 ## expressions.
 ## Defaults to: [
 #]
-{# % if thumbor_allowed_sources is defined and thumbor_allowed_sources is not none %#}
 {% if thumbor_allowed_sources %}
 ALLOWED_SOURCES = ['{{ thumbor_allowed_sources|join("', '") }}']
 {% endif %}
