@@ -15,7 +15,7 @@ This role is not only designed to setup Thumbor as an image scaling service but 
 Also unsafe URLs are disabled, meaning you can only use the service with knowing the secret signing key. See `thumbor_signing_key` variable.
 
 ## Requirements
-This role is build for Ubuntu server 18.04 but also might work on other Debian based distros.
+This role is built for Ubuntu server 18.04 but also might work on other Debian based distros.
 Also you need an AWS S3 bucket setup and the instance this runs on should assume an IAM role (or user credentials in .aws/ or set the AWS credentials env vars via the variables) to make the
 [AWS plugin](https://github.com/thumbor-community/aws) work (which uses [Boto](https://boto3.readthedocs.org/en/latest/guide/quickstart.html#configuration) to connect to S3).
 
