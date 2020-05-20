@@ -113,6 +113,7 @@
     name: thumbor.target
     enabled: yes
     daemon_reload: yes
+    state: started
   when:
     - ansible_distribution == 'Ubuntu'
     - ansible_distribution_version >= '15.04'

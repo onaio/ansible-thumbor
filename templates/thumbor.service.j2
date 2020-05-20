@@ -14,8 +14,10 @@ Type=simple
 Restart=on-failure
 
 User={{ thumbor_user }}
-Environment="PATH={{ thumbor_virtualenv_path }}/bin:$PATH"
-Environment="PYTHONPATH={{ thumbor_python_path }}"
+{% if thumbor_aws_access_key_id is defined and thumbor_aws_secret_access_key is defined %}
+Environment="AWS_ACCESS_KEY_ID={{ thumbor_aws_access_key_id }}"
+Environment="AWS_SECRET_ACCESS_KEY={{ thumbor_aws_secret_access_key }}"
+{% endif %}
 
 SyslogIdentifier=thumbor-%i
 

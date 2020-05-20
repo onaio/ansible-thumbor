@@ -22,9 +22,7 @@ thumbor_recreate_virtualenv: false
 
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor
-thumbor_allowed_sources:
-  - 'my-s3-namespace-.*s3.amazonaws.com'
-  - 'some-domain.com'
+thumbor_allowed_sources: []
 thumbor_client_side_cache_duration: 24 # in hours
 
 # Thumbor result storage (result caching) settings, using s3 storage
@@ -32,7 +30,7 @@ thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'
 thumbor_result_storage_path: result_storage
 thumbor_result_storage_expiration: 24 # in hours
 s3_aws_region: us-east-1
-s3_create_bucket: true
+s3_create_bucket: false
 
 # Thumbor image storage (source caching) settings
 thumbor_storage_expiration: 120 # in hours
