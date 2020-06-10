@@ -469,8 +469,8 @@ UPLOAD_PUT_ALLOWED = {{ thumbor_upload_put_allowed }}
 ################################################################################
 
 ############################### Thumbor AWS ####################################
-{% if s3_aws_region is defined %}
-TC_AWS_REGION = '{{ s3_aws_region }}'
+{% if thumbor_s3_aws_region is defined %}
+TC_AWS_REGION = '{{ thumbor_s3_aws_region }}'
 {% endif %}
 {% if thumbor_tc_aws_storage_bucket is defined %}
 TC_AWS_STORAGE_BUCKET = '{{ thumbor_tc_aws_storage_bucket }}'

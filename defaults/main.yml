@@ -29,8 +29,8 @@ thumbor_client_side_cache_duration: 24 # in hours
 thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'
 thumbor_result_storage_path: result_storage
 thumbor_result_storage_expiration: 24 # in hours
-s3_aws_region: us-east-1
-s3_create_bucket: false
+thumbor_s3_aws_region: us-east-1
+thumbor_s3_create_bucket: false
 
 # Thumbor image storage (source caching) settings
 thumbor_storage_expiration: 120 # in hours
