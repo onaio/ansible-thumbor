@@ -9,19 +9,19 @@
   delegate_to: 127.0.0.1
   # use normal user on ansible host (avoids switching to root)
   become: false
-  when: s3_create_bucket
+  when: thumbor_s3_create_bucket
 
 - name: Create result storage bucket on S3
   aws_s3:
     bucket: "{{ thumbor_result_storage_bucket }}"
     object: "/{{ thumbor_result_storage_path }}"
     mode: create
-    region: "{{ s3_aws_region }}"
+    region: "{{ thumbor_s3_aws_region }}"
   # run on ansible host
   delegate_to: 127.0.0.1
   # use normal user on ansible host (avoids switching to root)
   become: false
-  when: s3_create_bucket
+  when: thumbor_s3_create_bucket
 
 - name: Create thumbor config directory
   file:

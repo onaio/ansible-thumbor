@@ -3,7 +3,7 @@
   hosts: all
   vars:
     thumbor_signing_key: ABC123def456
-    s3_create_bucket: false
+    thumbor_s3_create_bucket: false
     ansible_python_interpreter: "/usr/bin/env python2"
   roles:
     - role: thumbor
