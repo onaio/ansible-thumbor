@@ -53,6 +53,7 @@ The following variables are not defined by defaulat
 * `thumbor_result_storage_module: "tc_aws.storages.s3_storage"` - The thumbor aws python result storage module to use
 * `thumbor_aws_access_key_id : <aws_access_key_id>` - The aws access key id to use. You want to set this if you'd like to upload to s3 and don't have credentials file in ~/.aws
 * `thumbor_aws_secret_access_key: <aws_secret_access_key>`  - The aws access key to use. You want to set this if you'd like to upload to s3 and don't have credentials file in ~/.aws
+* `thumbor_sentry_dsn_url: <thumbor_sentry_dsn_url>` - Sentry DSN url
 
 There is a config for the Nginx role in `vars/main.yml`. It's set to work with thumbor supervisord setup. But you can throw out stuff you don't
 need if you want. Make sure you keep Nginx upstream server config in sync with the Thumbor server processes started by supervisord.
