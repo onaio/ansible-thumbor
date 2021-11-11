@@ -411,8 +411,10 @@ STATSD_PORT = {{ thumbor_statsd_port }}
 ## month
 ## Defaults to: 2592000
 #STORAGE_EXPIRATION_SECONDS = 2592000
-{% if thumbor_storage_expiration is defined %}
+{% if thumbor_storage_expiration is defined and thumbor_storage_expiration > 0 %}
 STORAGE_EXPIRATION_SECONDS = 60 * 60 * {{ thumbor_storage_expiration }}
+{% else %}
+STORAGE_EXPIRATION_SECONDS = None
 {% endif %}
 
 ## Indicates whether thumbor should store the signing key for each image in the
