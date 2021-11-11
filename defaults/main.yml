@@ -33,6 +33,7 @@ thumbor_s3_aws_region: us-east-1
 thumbor_s3_create_bucket: false
 
 # Thumbor image storage (source caching) settings
+# Set thumbor_storage_expiration to 0 to disable image expiration
 thumbor_storage_expiration: 120 # in hours
 thumbor_storage_path: /var/tmp/thumbor/storage
 
