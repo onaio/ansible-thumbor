@@ -64,3 +64,8 @@ thumbor_system_dependencies:
   - "libpng-dev"
   - "libwebp-dev"
   - "webp"
+
+thumbor_python3_dependencies:
+  - "python3.6"
+  - "python3.6-dev"
+  - "python3-pip"
