@@ -43,6 +43,7 @@
     version: "{{ thumbor_aws_plugin_version }}"
     virtualenv: "{{ thumbor_virtualenv_path }}"
     virtualenv_python: "{{ thumbor_python_executable }}"
+  when: thumbor_use_aws_storage
 
 - name: Install additional packages
   become: true
