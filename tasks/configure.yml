@@ -9,7 +9,7 @@
   delegate_to: 127.0.0.1
   # use normal user on ansible host (avoids switching to root)
   become: false
-  when: thumbor_s3_create_bucket
+  when: thumbor_s3_create_bucket and thumbor_use_aws_storage
 
 - name: Create result storage bucket on S3
   aws_s3:
@@ -21,7 +21,7 @@
   delegate_to: 127.0.0.1
   # use normal user on ansible host (avoids switching to root)
   become: false
-  when: thumbor_s3_create_bucket
+  when: thumbor_s3_create_bucket and thumbor_use_aws_storage
 
 - name: Create thumbor config directory
   file:

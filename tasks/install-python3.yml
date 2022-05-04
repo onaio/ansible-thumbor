@@ -1,0 +1,12 @@
+---
+- name: Ensure dependencies are installed
+  apt:
+    pkg: "{{ thumbor_python3_dependencies }}"
+    state: present
+    update_cache: yes
+
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    executable: pip3
+    state: present
