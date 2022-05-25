@@ -4,14 +4,14 @@
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
 
-thumbor_aws_plugin_version: 6.2.12
+thumbor_aws_plugin_version: 6.2.15
 # Optionally set spefic thumbor version to not rely on tc_aws
 # dependency specification.
 # So before setting this make sure the specified version works
 # with the version of tc_aws set in thumbor_aws_plugin_version,
 # then set it like this:
-thumbor_version: 6.7.0
-thumbor_python_executable: python2.7
+thumbor_version: 7.0.10
+thumbor_python_executable: python3
 thumbor_home: "/home/{{ thumbor_user }}"
 thumbor_virtualenv_path: "{{ thumbor_home }}/.virtualenvs/{{ thumbor_user }}"
 thumbor_shell: "/sbin/nologin"
@@ -53,18 +53,34 @@ thumbor_executable_path: "{{ thumbor_virtualenv_path }}/bin/thumbor"
 
 # System dependencies
 # https://web.dev/install-thumbor/#install-thumbor-dependencies
-thumbor_system_dependencies: 
+thumbor_system_dependencies:
   - "build-essential"
   - "libgraphicsmagick++1-dev"
   - "libcurl4-openssl-dev"
   - "libssl-dev"
   - "libtiff5-dev"
-  - "python-opencv"
   - "libopencv-dev"
   - "libjpeg-dev"
   - "libpng-dev"
   - "libwebp-dev"
   - "webp"
+  - "python3-opencv"
+  - "python3-pip"
+  - "python3-dev"
+  - "libgnutls28-dev"
+  - "libjpeg-progs"
+  - "libimage-exiftool-perl"
+  - "gifsicle"
+  - "scons"
+  - "python3-all-dev"
+  - "libboost-python-dev"
+  - "libexiv2-dev"
+  - "ffmpeg"
+  - "make"
+  - "zlib1g-dev"
+  - "gcc"
+  - "libssl-dev"
+  - "redis"
 
 thumbor_python3_dependencies:
   - "python3.6"

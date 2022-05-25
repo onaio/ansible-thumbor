@@ -11,14 +11,29 @@
     home: "{{ thumbor_home }}"
     create_home: yes
 
-- include_tasks: "install-{{ thumbor_python_executable }}.yml"
-
 - name: Ensure system dependencies are installed
   apt:
     pkg: "{{ thumbor_system_dependencies }}"
     state: present
     update_cache: yes
     cache_valid_time: 600
+
+- name: Symbolic link for libboost_python3
+  file:
+    src: "/usr/lib/x86_64-linux-gnu/libboost_python38.a"
+    dest: "/usr/lib/x86_64-linux-gnu/libboost_python3.a"
+    state: link
+
+- name: Symbolic link for libboost_python3
+  file:
+    src: "/usr/lib/x86_64-linux-gnu/libboost_python38.so"
+    dest: "/usr/lib/x86_64-linux-gnu/libboost_python3.so"
+    state: link
+
+- name: Install virtualenv via pip
+  pip:
+    name: "virtualenv"
+    virtualenv_python:  "{{ thumbor_python_executable }}"
 
 - name: Delete the Thumbor virtualenv directory
   file:
@@ -30,7 +45,7 @@
   become: true
   become_user: "{{ thumbor_user }}"
   pip:
-    name: thumbor
+    name: "thumbor[all]"
     version: "{{ thumbor_version }}"
     virtualenv: "{{ thumbor_virtualenv_path }}"
     virtualenv_python: "{{ thumbor_python_executable }}"
