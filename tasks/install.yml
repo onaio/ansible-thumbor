@@ -54,7 +54,7 @@
   become: true
   become_user: "{{ thumbor_user }}"
   pip:
-    name: tc_aws
+    name: "git+https://github.com/thumbor-community/aws.git@7.0.1b#egg=tc-aws"
     version: "{{ thumbor_aws_plugin_version }}"
     virtualenv: "{{ thumbor_virtualenv_path }}"
     virtualenv_python: "{{ thumbor_python_executable }}"
