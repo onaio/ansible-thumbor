@@ -483,7 +483,9 @@ TC_AWS_RESULT_STORAGE_BUCKET = '{{ thumbor_tc_aws_result_storage_bucket }}'
 {% if thumbor_tc_aws_enable_http_loader is defined %}
 TC_AWS_ENABLE_HTTP_LOADER = {{ thumbor_tc_aws_enable_http_loader }}
 {% endif %}
-
+{%if thumbor_aws_loader_bucket is defined %}
+TC_AWS_LOADER_BUCKET = '{{ thumbor_aws_loader_bucket }}'
+{% endif %}
 
 ############################### Memcache Storage ###############################
 
