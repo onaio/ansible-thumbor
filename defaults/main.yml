@@ -11,7 +11,7 @@ thumbor_aws_plugin_version: 6.2.15
 # with the version of tc_aws set in thumbor_aws_plugin_version,
 # then set it like this:
 thumbor_version: 7.0.10
-thumbor_python_executable: python3
+thumbor_python_executable: python3.8
 thumbor_home: "/home/{{ thumbor_user }}"
 thumbor_virtualenv_path: "{{ thumbor_home }}/.virtualenvs/{{ thumbor_user }}"
 thumbor_shell: "/sbin/nologin"
@@ -19,6 +19,7 @@ thumbor_group: thumbor
 thumbor_user: thumbor
 thumbor_python_path: "{{ thumbor_virtualenv_path }}/lib/{{ thumbor_python_executable }}"
 thumbor_recreate_virtualenv: false
+thumbor_libboost_python3: "python38"
 
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor

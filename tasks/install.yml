@@ -20,13 +20,13 @@
 
 - name: Symbolic link for libboost_python3
   file:
-    src: "/usr/lib/x86_64-linux-gnu/libboost_python38.a"
+    src: "/usr/lib/x86_64-linux-gnu/libboost_{{ thumbor_libboost_python3 }}.a"
     dest: "/usr/lib/x86_64-linux-gnu/libboost_python3.a"
     state: link
 
 - name: Symbolic link for libboost_python3
   file:
-    src: "/usr/lib/x86_64-linux-gnu/libboost_python38.so"
+    src: "/usr/lib/x86_64-linux-gnu/libboost_{{ thumbor_libboost_python3 }}.so"
     dest: "/usr/lib/x86_64-linux-gnu/libboost_python3.so"
     state: link
 
