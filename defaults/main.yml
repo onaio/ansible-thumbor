@@ -4,7 +4,7 @@
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
 
-thumbor_aws_plugin_version: 6.2.15
+thumbor_aws_plugin_version: 7.0.1b
 # Optionally set spefic thumbor version to not rely on tc_aws
 # dependency specification.
 # So before setting this make sure the specified version works
