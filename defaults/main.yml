@@ -81,8 +81,3 @@ thumbor_system_dependencies:
   - "gcc"
   - "libssl-dev"
   - "redis"
-
-thumbor_python3_dependencies:
-  - "python3.6"
-  - "python3.6-dev"
-  - "python3-pip"
